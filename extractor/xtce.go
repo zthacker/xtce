@@ -17,7 +17,7 @@ func NewXTCEExtractor() *XTCEExtractor {
 
 func (X *XTCEExtractor) Extract(packet []byte, container *models.Container) (map[string]interface{}, error) {
 	decodedData := make(map[string]interface{})
-	for _, field := range container.Fields { // ✅ Loop over `Fields`, not `Containers`
+	for _, field := range container.Fields {
 		data, err := extractField(packet, field.StartByte, field.Length, field.DataType)
 		if err != nil {
 			return nil, err
