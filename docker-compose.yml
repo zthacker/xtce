@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_mcs
+    restart: always
+    environment:
+      POSTGRES_USER: mcs_user
+      POSTGRES_PASSWORD: mcs_pass
+      POSTGRES_DB: mcs_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongo_mcs
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  mcs-service:
+    build: .
+    container_name: mcs_service
+    restart: always
+    depends_on:
+      - postgres
+      - mongo
+    environment:
+      DATABASE_URL: "postgres://mcs_user:mcs_pass@postgres:5432/mcs_db?sslmode=disable"
+      MONGO_URI: "mongodb://mongo:27017"
+      XTCE_FILE_PATH: "/config/xtce.xml"
+    volumes:
+      - ./xtce.xml:/config/xtce.xml
+
+volumes:
+  postgres_data:
+  mongo_data:

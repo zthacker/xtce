@@ -1,0 +1,54 @@
+<SpaceSystem xmlns="http://www.omg.org/space/xtce" name="SAT-001">
+    <Header>
+        <Version>1.0.2</Version>
+    </Header>
+
+    <TelemetryMetaData>
+        <ParameterSet>
+            <Parameter name="Temperature">
+                <DataTypeRef>float</DataTypeRef>
+            </Parameter>
+            <Parameter name="Voltage">
+                <DataTypeRef>uint32</DataTypeRef>
+            </Parameter>
+        </ParameterSet>
+
+        <ContainerSet>
+            <SequenceContainer name="MainTelemetryContainer">
+                <BaseContainer>
+                    <RestrictionCriteria>
+                        <Comparison>
+                            <ParameterRef>APID</ParameterRef>
+                            <Value>1001</Value>
+                        </Comparison>
+                    </RestrictionCriteria>
+                </BaseContainer>
+
+                <EntryList>
+                    <ParameterRefEntry>
+                        <ParameterRef>Temperature</ParameterRef>
+                        <LocationInContainerInBits>32</LocationInContainerInBits>
+                    </ParameterRefEntry>
+                </EntryList>
+            </SequenceContainer>
+
+            <SequenceContainer name="PowerTelemetryContainer">
+                <BaseContainer>
+                    <RestrictionCriteria>
+                        <Comparison>
+                            <ParameterRef>APID</ParameterRef>
+                            <Value>1002</Value>
+                        </Comparison>
+                    </RestrictionCriteria>
+                </BaseContainer>
+
+                <EntryList>
+                    <ParameterRefEntry>
+                        <ParameterRef>Voltage</ParameterRef>
+                        <LocationInContainerInBits>32</LocationInContainerInBits>
+                    </ParameterRefEntry>
+                </EntryList>
+            </SequenceContainer>
+        </ContainerSet>
+    </TelemetryMetaData>
+</SpaceSystem>
