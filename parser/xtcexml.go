@@ -63,9 +63,9 @@ func (xt *XTCEParserForXML) Parse(filename string) (*models.XTCETelemetryDefinit
 
 			fields = append(fields, models.Field{
 				Name:      entry.ParameterRef,
-				StartByte: entry.LocationInContainerInBits / 8, // Convert bits to bytes
-				Length:    paramDetail.Length,                  // ✅ Use extracted Length
-				DataType:  paramDetail.DataType,                // ✅ Use extracted DataTypeRef
+				StartByte: entry.LocationInContainerInBits / 8,
+				Length:    paramDetail.Length,                
+				DataType:  paramDetail.DataType,                
 			})
 		}
 
