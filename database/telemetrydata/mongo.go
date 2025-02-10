@@ -21,7 +21,6 @@ func NewMongoTelemtry(client *mongo.Database) *MongoTelemetry {
 func (mt *MongoTelemetry) InsertXTCEContainer(xtceData *models.XTCETelemetryDefinition) error {
 	collection := mt.db.Collection("xtce_containers")
 
-	// Debug: Print what we are inserting
 	log.Printf("Inserting XTCE data into MongoDB: %+v\n", xtceData)
 
 	filter := bson.M{"satellite_id": xtceData.SatelliteID, "xtce_version": xtceData.XTCEVersion}
